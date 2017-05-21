@@ -18,7 +18,7 @@ class VectorDictionary(object):
         self.dimension = dimension
 
         if vectors is not None:
-            for coordinates in vectors.values():
+            for coordinates in list(vectors.values()):
                 if not isinstance(coordinates, np.ndarray):  # Check if pre-filled dictionary values are numpy arrays.
                     raise TypeError('`vectors` argument should contain numpy arrays values.')
 
@@ -31,7 +31,7 @@ class VectorDictionary(object):
             self.vectors = OrderedDict()
 
     def __str__(self):
-        return "VectorDictionary({})".format(self.items())
+        return "VectorDictionary({})".format(list(self.items()))
 
     def __repr__(self):
         return "VectorDictionary({})".format(repr(self.vectors))
@@ -67,7 +67,7 @@ class VectorDictionary(object):
 
         similarity_dict = dict()
 
-        for key, key_coordinates in self.items():
+        for key, key_coordinates in list(self.items()):
             similarity_dict[key] = 1 - spatial.distance.cityblock(key_coordinates, coordinates)  # 1 - distance = similarity
 
         return Counter(similarity_dict).most_common(best)
@@ -82,13 +82,13 @@ class VectorDictionary(object):
         :param to_dimension: New dict dimension
         :return: A new dict with values that respect `to_dimension` arg
         """
-        raw_coordinates = np.array([coordinates for coordinates in self.values()])
+        raw_coordinates = np.array([coordinates for coordinates in list(self.values())])
 
         SVD_model = TruncatedSVD(n_components=to_dimension)
         reduced_coordinates = SVD_model.fit_transform(raw_coordinates)
 
         reduced_dict = VectorDictionary(dimension=to_dimension)
-        for index, key in enumerate(self.keys()):
+        for index, key in enumerate(list(self.keys())):
             reduced_dict[key] = reduced_coordinates[index]
 
         return reduced_dict

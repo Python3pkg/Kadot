@@ -32,7 +32,7 @@ class SVMClassifier(BaseClassifier):
     def fit(self, documents):
         BaseClassifier.fit(self, documents)
 
-        self.sk_model = SVC().fit(self.text_vectors.values(), self.labels)
+        self.sk_model = SVC().fit(list(self.text_vectors.values()), self.labels)
 
     def predict(self, documents):
         unique_word_save = self.vectorizer.unique_words
@@ -41,4 +41,4 @@ class SVMClassifier(BaseClassifier):
 
         predict_vectors = self.vectorizer.transform()
 
-        return dict(zip(documents,self.sk_model.predict(predict_vectors.values())))
+        return dict(list(zip(documents,self.sk_model.predict(list(predict_vectors.values())))))

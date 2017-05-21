@@ -41,7 +41,7 @@ class MarkovGenerator(BaseGenerator):
         for corpus in self.documents:
             for index, word in enumerate(corpus):
                 if not word == self.end_token:
-                    if word in self.markov_chain.keys():
+                    if word in list(self.markov_chain.keys()):
                         self.markov_chain[word].append(corpus[index+1])
                     else:
                         self.markov_chain[word] = [corpus[index + 1]]

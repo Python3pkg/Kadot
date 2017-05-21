@@ -92,6 +92,6 @@ class DocVectorizer(BaseVectorizer):
             vectorizer.unique_words = self.unique_words
 
             document_vocabulary_vectors = vectorizer.transform()
-            vector_dict[document] = np.mean(np.array(document_vocabulary_vectors.values()), axis=0)
+            vector_dict[document] = np.mean(np.array(list(document_vocabulary_vectors.values())), axis=0)
 
         return vector_dict

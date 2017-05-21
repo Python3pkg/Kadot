@@ -11,4 +11,4 @@ generator.fit(tweets)
 
 for i in range(0, 100):
     print('---------------------------')
-    print(generator.predict(25)[:140])  # Generate text with max 25 words and cut at 140 first character like a tweet.
+    print((generator.predict(25)[:140]))  # Generate text with max 25 words and cut at 140 first character like a tweet.

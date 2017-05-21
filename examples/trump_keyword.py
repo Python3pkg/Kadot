@@ -16,5 +16,5 @@ word_vectorizer.fit(tweets)
 word_vectors = word_vectorizer.transform()
 
 for tweet in tweets:
-    print("\n{}".format(tweet))
-    print(word_vectors.most_similar(tweet_vectors[tweet]))
+    print(("\n{}".format(tweet)))
+    print((word_vectors.most_similar(tweet_vectors[tweet])))
